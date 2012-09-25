@@ -1,0 +1,185 @@
+<!doctype html>
+<!-- The DOCTYPE declaration above will set the     -->
+<!-- browser's rendering engine into                -->
+<!-- "Standards Mode". Replacing this declaration   -->
+<!-- with a "Quirks Mode" doctype is not supported. -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<link type="text/css" rel="stylesheet" href="SlidingPuzzle.css">
+
+<title>Sliding puzzle</title>
+
+<script type="text/javascript" language="javascript"
+	src="slidingpuzzle/slidingpuzzle.nocache.js"></script>
+</head>
+
+<body>
+
+	<noscript>
+		<div
+			style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+			Your web browser must have JavaScript enabled in order for this
+			application to display correctly.</div>
+	</noscript>
+	<div id="content">
+		<div style='float: right'>
+			<div class="g-plusone"></div>
+		</div>
+
+		<h1 style="margin-bottom: 40px;">Sliding puzzle</h1>
+
+
+		<div style="clear: right; width: 100%"></div>
+
+		<div style="margin-bottom: 20px;">
+			<p>This application finds the optimal solution to solve a 8 or
+				15-puzzle. By optimal solution, we mean a solution requiring the
+				minimum numbers of moves.</p>
+			<p>
+				Different algorithms are implemented : <a
+					href="http://en.wikipedia.org/wiki/Breadth-first_search">Breadth
+					First Search</a>, <a href="http://en.wikipedia.org/wiki/A_star">A*</a>
+				or <a href="http://www.google.be/search?q=Iterative+deepening+A*">Iterative
+					Deepening A* (IDA*)</a>. You can use and compare these algorithms only
+				for the 8-puzzle. Indeed, only IDA* are able to resolve a 15-puzzle
+				relatively fast and without consuming too much memory.
+			</p>
+			<p>A* and IDA* algorithms use heuristic function to find the
+				optimal solution. Three heuristic functions are proposed : Manhattan
+				Distance, Linear Conflict and Database Pattern.</p>
+			<p>This web application is deployed on Google App Engine infrastructure (Frontend Instance Class F2 : 1200MHz, 256 MB). The algorithm has 60 seconds to solve the puzzle.</p>
+			<p>
+				The code is open-sourced and can be found <a
+					href="http://code.google.com/p/julien-labs/source/browse/#svn%2Ftrunk%2FSlidingPuzzle%2Fsrc%2Fbe%2Fdramaix%2Fai%2Fslidingpuzzle%2Fclient">here</a>
+			</p>
+		</div>
+
+		<div id="timeout">Oops, the search algorithm has not been able to solve the puzzle in 60 seconds. Please try again with a different algorithm or another heuristic function.</div>
+		<div id="error">Oops, something went wrong. Please try again...</div>
+		
+		<div id="right" style="width: 55%; float: right; margin-right: 15px;">
+
+			<div id="choice" style="margin-bottom: 20px;">
+				<form action="#">
+					<table cellpadding="5">
+						<tr>
+							<td colspan='2' align='center' class='header'>Puzzle
+								configuration</td>
+						</tr>
+						<tr>
+							<td class='label'>Puzzle type:</td>
+							<td><input type="radio" name="puzzleType" value="3" /> 3X3
+								<input type="radio" name="puzzleType" value="4" checked />4X4</td>
+						</tr>
+						<tr>
+							<td class='label'>Algorithm type:</td>
+							<td><select id="algorithmType"></select><span></span></td>
+						</tr>
+						<tr>
+							<td class='label'>Heuristic type:</td>
+							<td><select id="heuristicType"></select></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+
+			<div>
+				<table cellpadding="5">
+					<tr>
+						<td colspan='2' align='center' class='header'>Results</td>
+					</tr>
+					<tr>
+						<td class='label'># of moves:</td>
+						<td><span id='numberOfMoves'></span></td>
+					</tr>
+					<tr>
+						<td class='label'>Elapsed time:</td>
+						<td><span id='elapsedTime'></span>ms</td>
+					</tr>
+					<tr>
+						<td class='label'>Path:</td>
+						<td><span id='path'></span></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div id="puzzle" class="puzzleTable"
+			style="height: 332px; width: 332px;">
+			<div class="tile">1</div>
+			<div class="tile">2</div>
+			<div class="tile">3</div>
+			<div class="tile">4</div>
+			<div class="tile">5</div>
+			<div class="tile">6</div>
+			<div class="tile">7</div>
+			<div class="tile">8</div>
+			<div class="tile">9</div>
+			<div class="tile">10</div>
+			<div class="tile">11</div>
+			<div class="tile">12</div>
+			<div class="tile">13</div>
+			<div class="tile">14</div>
+			<div class="tile">15</div>
+			<div class="tile empty"></div>
+		</div>
+
+		<div id="actionsBar" style="display: none;">
+			<button id="random">Make it random!</button>
+			<button id="solve">Solve!</button>
+			<button id="play">Play the result!</button>
+		</div>
+
+		<div class="social">
+			<div>About the author</div>
+			<a href="https://plus.google.com/103916508880440628637"
+				target="_blank"> <img src="/img/gplus.png" width="32px"
+				height="32px" alt="Circle Julien Dramaix"
+				title="Circle Julien Dramaix">
+			</a> <a href="http://twitter.com/jdramaix" target="_blank"> <img
+				src="/img/twitter.png" width="32px" height="32px"
+				alt="Follow Julien Dramaix" title="Follow Julien Dramaix">
+			</a> <a href="http://www.linkedin.com/in/juliendramaix" target="_blank">
+				<img src="/img/linkedin.png" width="33px" height="32px"
+				alt="Connect with Julien Dramaix"
+				title="Connect with Julien Dramaix">
+			</a>
+
+		</div>
+
+	</div>
+
+
+	<script type="text/javascript">
+		(function() {
+			var po = document.createElement('script');
+			po.type = 'text/javascript';
+			po.async = true;
+			po.src = 'https://apis.google.com/js/plusone.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(po, s);
+		})();
+	</script>
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push([ '_setAccount', 'UA-23437119-2' ]);
+		_gaq.push([ '_trackPageview' ]);
+
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+</body>
+</html>

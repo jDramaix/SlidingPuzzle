@@ -1,0 +1,129 @@
+/** Add css rules here for your application. */
+/** Example rules used by the template application (remove for your app) */
+h1 {
+	font-size: 2em;
+	font-weight: bold;
+	color: #777777;
+	margin: 40px 0px 70px;
+	text-align: center;
+}
+
+.puzzleTable {
+	width: 332px;
+	height: 332px;
+	overflow: hidden;
+	border: solid 4px rgb(222, 162, 84);
+	position: relative;
+	background-color: gray;
+}
+
+.tile,.empty {
+	width: 80px;
+	height: 50px;	
+	float: left;
+	text-align: center;
+	padding-top: 30px;	
+	margin-right: 1px;
+	margin-bottom: 1px;
+	font-size: 20px;
+	font-family: arial;
+}
+
+.tile {
+	background-color: white;
+	border: solid 1px black;
+}
+
+
+.helper{
+	position: absolute;
+	float: none;
+}
+
+
+.empty {
+	background-color: gray;
+	color: gray;
+	border: solid 1px gray;
+}
+
+.header {
+	font-size: 110%;
+	font-weight: bold;
+	color: #555
+}
+
+.label {
+	font-weight: bold;
+	vertical-align: top;
+	min-width: 100px;
+}
+
+#content {
+	width: 800px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+table {
+	width: 100%;
+	border: solid 1px black;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+
+.msg-popup-panel {
+	width:210px; 
+	margin-right:auto; 
+	margin-left:auto;
+	padding-top: 10px;
+	position: relative;
+}
+
+.msg-popup-panel > div {
+	position: absolute;
+	top: 40%;
+	left: 40px;
+}
+
+#actionsBar{
+	margin-top: 5px;
+}
+.social {
+	font-size: 0.9em;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	float:right;
+	clear: both;
+}
+.social div {
+	margin-bottom: 3px;
+}
+
+#error, #timeout{
+	display: none;
+	border: 1px solid;
+	margin: 10px 0px;
+	padding:15px 10px 15px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+
+/* 
+icons credits : Knob Toolbar icons collection
+http://itweek.deviantart.com/art/Knob-Buttons-Toolbar-icons-73463960
+*/
+
+#error {
+	color: #D8000C;
+	background-color: #FFBABA;
+	background-image: url('/img/error.png');
+}
+
+#timeout{
+	color: #9F6000;
+	background-color: #FEEFB3;
+	background-image: url('/img/warning.png');
+}
